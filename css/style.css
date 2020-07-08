@@ -204,6 +204,14 @@ color:#8259A7;
 	justify-content: space-between;
 	
 }
+.wrap-reg{
+	height: 500px;
+	width: 90%;
+	margin:auto;
+	margin-bottom: 50px;
+	background-color: #fff;
+	border-radius: 5px;
+}
 .contain{
 	width: 70%;
 	border-radius: 5px;

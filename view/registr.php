@@ -1,19 +1,14 @@
 
 <!-- content start -->
-	
-		<div class="contain">
-		
-			<div class="wrap-cart">
-				fgfg
-			</div>
-		<!-- end wrap -->
+	<div class="wrap">
+
+		<div class="wrap-reg">
+			
 		</div>
-	
-	
-		
-		
+	</div>
+		<?php 
 
-
-	</footer>
-</body>
-</html>
+					?>
+				
+		<!-- end wrap -->
+	</div>
