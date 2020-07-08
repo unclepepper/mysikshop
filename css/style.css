@@ -103,6 +103,11 @@ color:#8259A7;
 	margin-left: 50px;
 	
 }
+.home{
+	width: 30px;
+	height: 30px;
+	margin-right: 20px;
+}
 .search{
 	width: 80%;
 	height: 30px;
@@ -229,7 +234,7 @@ color:#8259A7;
 	display: flex;
 	align-content:  flex-start;
 	flex-wrap: wrap;
-	border: 1px solid #000;
+  
 }
 .links{
 	width: 100%;
@@ -355,9 +360,10 @@ cursor: pointer;
 	justify-content: center;
 }
 .back li{
+	width: 90%;
 	 list-style-type: none;
 	text-align: center;
-	margin-right: 15%;
+	/*margin-right: 15%;*/
 }
 .back li:hover a{
 	color:#FFFF80;
@@ -366,10 +372,6 @@ cursor: pointer;
 	width: 90%;
 	margin:auto;
 	height: 150px;
-	/*background-image: url(../image/foot.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position:0 37%;*/
 	background-color: #70409B;
 	box-shadow: 0 0 5px #70409B;
 	display:flex;
