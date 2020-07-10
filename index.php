@@ -1,4 +1,8 @@
 <?php 
+$mysqli = new mysqli('localhost', 'root', '', 'rock_shop'); //Создаем подключение к базе данных
+    if ($mysqli->connect_errno) {
+        echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    }
 
 include 'header.php';?>
 <!-- hat end -->
@@ -17,8 +21,8 @@ include 'header.php';?>
 		if(isset($_GET['search'])){
 			$search = $_GET['search'];
 			include 'view/search.php';
-		}else if(isset($_GET['reg'])){
-			$reg = $_GET['reg'];
+		}else if(isset($_GET['type'])){
+			$reg = $_GET['type'];
 			include 'view/registr.php';
 		 
 		}else if(isset($_GET['cust'])){

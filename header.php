@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"> 
 </head>
 <body>
-	<?php if(!isset($_GET['guitar']) and !isset($_GET['reg'])and !isset($_GET['klav'])){
+	<?php if(isset($_GET['home']) || isset($_GET['guitar'])) {
 				include 'media.php';
 			}
 	?>
@@ -40,7 +40,7 @@
 			<div class="alert"><p>1</p></div>
 		</div>
 				
-				<div class="log-in"><a href="?reg"><img src="image/login.png" width="30" title="Авторизируйтесь"></a>
+				<div class="log-in"><a href="?type"><img src="image/login.png" width="30" title="Авторизируйтесь"></a>
 				</div>
 				<div class="profile"><a href="#"><img src="image/punk.png" width="30" title="Ваш профиль"></a>
 				</div>
