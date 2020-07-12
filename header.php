@@ -1,3 +1,30 @@
+<?php 
+
+// if(isset($_COOKIE['auth']) == 'true') {//Получаем куки и проверяем авторизован ли пользователь
+//   $auth =  $_COOKIE['auth'];
+//   $userid = $_COOKIE['userid'];
+//   $useremail = $_COOKIE['useremail'];
+//   $username = $_COOKIE['username'];
+//   $usersurname = $_COOKIE['usersurname'];
+
+if(isset($_GET['exit'])){
+       
+            unset($_COOKIE['auth']);
+        SetCookie("auth", "", time()-3600); 
+        unset($_COOKIE['username']);
+        SetCookie("username", "", time()-3600); 
+        unset($_COOKIE['useremail']);
+        SetCookie("useremail", "", time()-3600); 
+        unset($_COOKIE['userid']);
+        SetCookie("userid", "", time()-3600); 
+        unset($_COOKIE['usersurname']);
+        SetCookie("usersurname", "", time()-3600); 
+       if(isset($_GET['cust'])){
+       	header('location:?type');
+       }
+
+     }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,33 +49,38 @@
 					<img src="image/concert.png" width="30" class="and-top">
 				</div>
 				<span class="shop-top">Shop</span>
-			 </a>
-			
+			 </a>	
 		</div>
-		<div class="home">
-				</div>
+		<div class="home"></div>
+
 		<form action="?search" method="GET" class="form">
 		
 			<a href="?home" class="home"><img src="image/home.png" width="30" title="ДОМОЙ"></a>
 			<input type="text" name="search" class="search" placeholder="Поиск...">
 			<input type="submit" value="Найти" class="button">
 		</form>
+
 		<div class="right-heat-menu">
-
+		<?php if(isset($_COOKIE['auth']) == 'true') {?>
 			<div class="basket">
-				<a href="#"><img src="image/buy.png" width="30" title="Корзина"></a>
-			<div class="alert"><p>1</p></div>
-		</div>
+					<a href="#"><img src="image/buy.png" width="30" title="Корзина"></a>
+				<!-- <div class="alert"><p>1</p></div> -->
+			</div>
 				
-				<div class="log-in"><a href="?type"><img src="image/login.png" width="30" title="Авторизируйтесь"></a>
-				</div>
-				<div class="profile"><a href="#"><img src="image/punk.png" width="30" title="Ваш профиль"></a>
-				</div>
-				<div class="log-out"><a href="#"><img src="image/logout.png" width="30" title="Выйти"> </a>
-				</div>
-				 <div class="cust"><a href="?cust"><img src="image/setting.png" width="30" title="Настройки"></a>
-				 </div>
+				<?php $res = urle(); ?>
+			<div class="log-out"><a href="?<?php echo $res ?>&exit"><img src="image/logout.png" width="30" title="Выйти"> </a>
+			</div>	
+			<div class="cust"><a href="?cust"><img src="image/setting.png" width="30" title="Настройки"></a>
+			 </div>
+				<?php }else{ ?>
+			<div class="log-in"><a href="?type"><img src="image/login.png" width="30" title="Авторизируйтесь"></a>
+			</div>
 
+				<?php } ?>
+				
+				
+				 
+	
 
 		</div>
 		

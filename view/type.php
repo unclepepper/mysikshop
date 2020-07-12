@@ -1,8 +1,6 @@
 <?php 
-if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и проверяем авторизован ли пользователь
-      header('Location: http://as-ps.ru/?home');  //Если авторизован, то перенаправляем на главную страницу
-    }
-  
+
+ 
 	function formastr($str) {
 		$str = trim($str);
 		$str = stripslashes($str);
@@ -10,27 +8,23 @@ if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и пров�
 		return $str;
 	}
 	
-   
-    
     $error_auth = ''; //Текст ошибки для авторизации
     $error_reg = ''; //Текст ошибки для регистрации
     $success_auth = ''; 
     $success_reg = ''; 
  
-	 if(isset($_GET['type'])){
-	 	$type = $_GET['type']; //Получаем тип запроса
+	 if(isset($_POST['type'])){
+	 	$type = $_POST['type']; //Получаем тип запроса
 	 }
-    
 
-                
+       if(isset($_POST['type'])){          
     if($type == 'auth') { //Если тип запроса 'auth' тогда проверяем почту и пароль для авторизации пользователя
        
-        $email = formastr($_GET['email']); //Получаем почту пользователя
-        $password = formastr($_GET['pass']); //Получаем пароль пользователя
+        $email = formastr($_POST['email']); //Получаем почту пользователя
+        $password = formastr($_POST['pass']); //Получаем пароль пользователя
         if($email != NULL or $password != NULL){
-            $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '".$email."'"); //Выполняем запрос на получение информации о пользователе по почте
-            $row = $result->fetch_assoc(); //Извлекаем массив с данными пользователя
-            //Проверяем сходится ли пароль из базы данных с паролем который ввел пользователь
+            $row = row($email); 
+
                 if( $row['email']==$email){
                     if ($row['pass'] == $password) {
                     SetCookie("auth", "true",time()+3600,'/'); //Устанавливаем куки что пользователь авторизован
@@ -38,8 +32,16 @@ if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и пров�
                     SetCookie("useremail", $row['email'],time()+3600,'/');
                     SetCookie("username", $row['name'],time()+3600,'/');
                     SetCookie("usersurname", $row['surname'],time()+3600,'/');
+                    SetCookie("isadmin", $row['is_admin'],time()+3600,'/');
+
+                    
                  
-                    header('Location: http://as-ps.ru/?home');  //Перенаправляем на главную страницу
+                    if($row['is_admin'] =='1'){
+
+                          header('Location:http://as-ps.ru/?cust');  
+                        }else{
+                            header('Location: http://as-ps.ru/?home');  
+                            }
                      $success_auth = ' Пользователь ' .$email . ' авторизован!';
                 } else {
                     $error_auth = 'Не правильная почта или пароль!'; //Если пароли не сошлись тогда выводим ошибку
@@ -54,13 +56,15 @@ if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и пров�
 	
 		
     }
+}
+ if(isset($_POST['type'])){
     if($type == 'reg') {
-       		 $date = $_GET['date'];
-            $email = $_GET['email']; //Получаем почту
-            $password = $_GET['pass']; //Получаем пароль
-            $password_re = $_GET['pass_re']; //Получаем пароль 2
-            $name = $_GET['name']; //Получаем имя
-            $surname = $_GET['surname']; //Получаем фамилию
+       		 $date = $_POST['date'];
+            $email = $_POST['email']; //Получаем почту
+            $password = $_POST['pass']; //Получаем пароль
+            $password_re = $_POST['pass_re']; //Получаем пароль 2
+            $name = $_POST['name']; //Получаем имя
+            $surname = $_POST['surname']; //Получаем фамилию
         if($email != '' and $password != '' ){
             if($password == $password_re) {
                 $insert = $mysqli->query("INSERT INTO `users` (`id_user`, `email`, `pass`, `name`,`surname`,`date`,`is_admin`) VALUES (NULL, '".$email."', '".$password."', '".$name."', '".$surname."','".$date."','0')");
@@ -77,16 +81,17 @@ if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и пров�
         $error_reg = '';
         $success_reg = ''; 
     }
-    if(isset($_GET['search'])){
-        $search = $_GET['search'];
+    if(isset($_POST['search'])){
+        $search = $_POST['search'];
         header('Location: /search.php?search='.$search);  
     }
+}
 ?>
 <!-- content start -->
 	<div class="wrap">
 
 		<div class="wrap-reg">
-			<form method="GET" class="reg">
+			<form method="POST" class="reg">
 					
 				<?php
                     if($error_auth != null) { //Проверяем есть ли у нас ошибка
@@ -108,7 +113,7 @@ if(isset($_COOKIE['auth']) == 'true') { //Получаем куки и пров�
 				
 				<input type="submit" value="Авторизироваться" class="but-auth">
 			</form>
-			<form method="GET" class="reg">
+			<form method="POST" class="reg">
 				
 				 <?php
                     if($error_reg != null) { //Проверяем есть ли у нас ошибка
