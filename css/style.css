@@ -569,3 +569,18 @@ table td img{
 	border: 1px solid #F74A09 ;
 	border-radius:3px;
 }
+.reg-admin .up-img {
+	width: 100%;
+	display:flex;
+	justify-content: space-between;
+	align-self:     center;
+	border: 1px solid #F74A09 ;
+}
+#up-img-input{
+	display: flex;
+	justify-content: space-between;
+	border:none;
+	width: 100%;
+	border-radius: 3px;
+	
+}

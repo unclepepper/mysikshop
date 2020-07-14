@@ -63,9 +63,10 @@ if(isset($_COOKIE['auth']) == 'true') {
 
 $result = $mysqli->query("SELECT  * FROM `users`");
 $success_reg = ''; 
-if($is_admin['is_admin']=='1') { 
+
 if(isset($_GET['delete'])){
     if($_GET['delete']=='yes'){
+    	if($is_admin['is_admin']== 1) { 
         $user=$_GET['user'];
         $mysqli->query("DELETE  FROM `users` WHERE `id_user` = '".$user."'");
         $success_del = 'Пользователь удален!'; 
@@ -120,8 +121,8 @@ if(isset($_GET['delete'])){
         <tr><td>Фамилия</td><td>Имя</td><td>email</td><td>Логин</td><td>Статус</td></tr>
        <?php foreach($result as $res){ ?> 
                <tr><td>
-               <?php if($is_admin['is_admin']==1) {?>
-               <a href='?cust&delete=yes&user=<?php echo $res['id_user']; ?>' class='delete' title="удалить пользователя  <?php echo $res['email']; ?> ?"><img src='image/close1.png' width='20'></a>
+               <?php if($isadmin == 1) {?>
+               <a href='?cust&delete=yes&user=<?php echo $res['id_user']; ?>' class='delete' title="удаление пользователя  <?php echo $res['email']; ?>"><img src='image/close1.png' width='20'></a>
                <?php }?>
                 <?php echo $res['surname']; ?></td><td><?php echo $res['name']; ?></td><td><?php echo $res['email']; ?></td><td><?php echo $res['email']; ?></td><td>
                 <?php if($res['is_admin']==1){echo 'admin';}else{echo 'пользователь';} ?></td></tr>
@@ -163,7 +164,7 @@ if(isset($_GET['delete'])){
 				</select>
 					<input type="text" name="name_product" placeholder="Наименование">
 					<input type="text" name="name_mark" placeholder="Производитель">
-					<input type="text" name="name_mark" placeholder="Картинка товара">
+					<input type="submit" value="Добавить">
 					
 
 

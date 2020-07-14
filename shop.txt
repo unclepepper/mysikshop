@@ -1,0 +1,14 @@
+Категории
+id   title          title_en       idparents      img
+1    Гитары         guitar         null
+2    Классические   classic        1
+3    Электро        elctro         1
+4    Клавишные                     null
+5    Классические                  4
+
+
+Товар
+id    catid    title     desc
+1     2        Гитара    Описание
+2     3        Гитара    Описание
+3     2        Гитара    Описание
