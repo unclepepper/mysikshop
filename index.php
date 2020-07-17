@@ -29,10 +29,23 @@ include 'header.php';
 		// echo $res;
 
 		if(isset($_GET['delete'])){
-        		$user=$_GET['user'];
-        if($res == 'custyes'.$user){
-				 include 'view/cust.php';
-			}
+				if($_GET['delete']=='us'){
+					if(isset($_GET['user'])){
+				$user=$_GET['user'];
+				if($res == 'custus'.$user){
+					 include 'view/cust.php';
+					} 
+				}		
+				
+			}else if($_GET['delete']=='prod'){
+					if(isset($_GET['product'])){
+						$product = $_GET['product'];
+						if($res == 'custprod'.$product){
+							 include 'view/cust.php';
+						}
+					}
+				}	
+       
     	}
 		
 		if($res !== '/'){
@@ -42,14 +55,12 @@ include 'header.php';
 			}else {
             include 'view/home.php';
 			
-			}
-							 
-			           
+			}     
 			
 			
 		}else {
-            include 'view/home.php';
-             			  // header('location:?home');  
+            // include 'view/home.php';
+             			  header('location:?home');  
 			           
 			}
 		

@@ -1,14 +1,19 @@
+<?php 
+$result = $mysqli->query("SELECT * FROM `cat_product` "); 
 
+?>
 <!-- content start -->
 	<div class="wrap">
 
-		<div class="site-bar">
+		<div class="site-bar">			
 			<div class="site-bar-links">
-			<div class="links"><a href="?guitar/acustic">Акустические гитары</a></div>
-			<div class="links"><a href="?guitar/classic">Классические гитары</a></div>
-			<div class="links"><a href="guitar/current">Электро гитары</a></div>
-			<div class="links"><a href="?guitar/bass">Бас гитары</a></div>
-			<div class="links"><a href="?guitar/proc">Процессоры</a></div>
+					<?php foreach ($result as $value) {?>
+			<a class="links" href="?guitar/<?=$value['title_en']?>"><?=$value['title']?></a>
+			<?php }?>
+			<!-- <a class="links" href="?guitar/classic">Классические гитары</a>
+			<a class="links" href="guitar/current">Электро гитары</a>
+			<a class="links" href="?guitar/bass">Бас гитары</a>
+			<a class="links" href="?guitar/proc">Процессоры</a> -->
 		</div>
 	</div>
 		<!-- content start -->
