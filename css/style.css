@@ -356,10 +356,10 @@ cursor: pointer;
 
 }
 .back{
-	background-color: #F9875B;
-	transform: rotateY(180deg);
 	display: flex;
-	justify-content: flex-start;
+
+	background-color: #1EF077;
+	transform: rotateY(180deg);
 	color: #fff;
 
 }
@@ -371,20 +371,33 @@ cursor: pointer;
 	display: flex;
 	justify-content: center;
 }
+.back-link{
+
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	
+
+	
+
+}
 .back a{
 	display: flex;
-	background-color: #0CB654;
-	padding: 10px 5px 5px 5px;
 	justify-content: center;
 	align-self: center;
-	width: 70%;
-	text-align: center;
-	margin:auto;
+	background-color: #54F398;
+	padding: 10px;
+	width: 100%;
+	
+	margin: 10px;
+	border-radius: 3px;
 	
 }
 .back a:hover {
-	background-color: red;
-	color:#000;
+
+	border: 1px solid #1EF077;
+	border-radius: 3px;
+	box-shadow: 0 0 10px #F9875B;
 }
 .footer{
 	width: 90%;

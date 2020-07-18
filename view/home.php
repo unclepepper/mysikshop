@@ -1,6 +1,6 @@
 <?php 
  $result = $mysqli->query("SELECT * FROM `category` "); 
-	$rand = $mysqli->query("SELECT * FROM `product` ORDER BY RAND() LIMIT 12 "); 
+	$rand = $mysqli->query("SELECT * FROM `product` ORDER BY RAND() LIMIT 9 "); 
 
 
 
@@ -40,10 +40,13 @@
 
 					</div>
 					<div class="back">		
-							 <!-- <li><a href="?guitar/<?=$val['title_en']?>"><?=$val['title']?></a></li> -->
-						
-							<a href="?" class="button">В корзину </a> 
-							<a href="?<?=$linkcat['title_en'].'/'.$link_product?>" class="button">Смотреть больше </a>
+							
+						<div class="back-link">
+							
+							<a href="?<?=$linkcat['title_en'].'/'.$link_product?>" class="button-back">Смотреть больше </a>
+							<a href="?" class="button-back">В корзину </a> 
+						</div>
+							
 						
 						 
 					</div>
