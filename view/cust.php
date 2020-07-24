@@ -130,7 +130,6 @@ if(isset($_GET['delete'])){
 	}else{ ?>
 
 		<div class="contain-catalog">
-		
 			<div class="admin">
 				<h3>Панель администратора <?= $username. ' ' . $usersurname?></h3>
 				<div class="add-user">
@@ -143,8 +142,6 @@ if(isset($_GET['delete'])){
                         echo '<p>'.$success_reg .'</p>'; //
                     }else{
                     	 echo '<h3>Регистрация</h3>';
-                    
-                    
                      }?>
 				<input type="hidden" name="type" value="reg">
 				<input type="text" name="name" placeholder="Введите имя">
@@ -159,19 +156,18 @@ if(isset($_GET['delete'])){
 
 			<div class="table-user">
 				 <div class="wrap-table">
-        <h3>Пользователи сайта</h3>
-        <table align="center" border="1" width="95%" >
-        <tr><td>Удаление</td><td>Фамилия</td><td>Имя</td><td>email</td><td>Пароль</td><td>Статус</td></tr>
-       <?php foreach($result as $res){ ?> 
-               <tr><td>
-               <?php if($isadmin == 1) {?>
-               <a href='?cust&delete=us&user=<?php echo $res['id_user']; ?>' class='delete' title="удаление пользователя  <?php echo $res['email']; ?>"><img src='image/close1.png' width='20'></a></td><td>
-               <?php }?>
-                <?php echo $res['surname']; ?></td><td><?php echo $res['name']; ?></td><td><?php echo $res['email']; ?></td><td><?php echo $res['pass']; ?></td><td>
-                <?php if($res['is_admin']==1){echo 'admin';}else{echo 'user';} ?></td></tr>
-        
-            <?php } ?>
-        </table>
+                <h3>Пользователи сайта</h3>
+                <table align="center" border="1" width="95%" >
+                    <tr class="bn"><td class="bn">Удалить</td><td>Фамилия</td><td>Имя</td><td>email</td><td>Пароль</td><td>Статус</td></tr>
+                        <?php foreach($result as $res){ ?> 
+                   <tr><td class="bn">
+                        <?php if($isadmin == 1) {?>
+                   <a href='?cust&delete=us&user=<?php echo $res['id_user']; ?>' class='delete' title="удаление пользователя  <?php echo $res['email']; ?>"><img src='image/close1.png' width='20'></a></td><td>
+                        <?php }?>
+                    <?php echo $res['surname']; ?></td><td><?php echo $res['name']; ?></td><td><?php echo $res['email']; ?></td><td ><?php echo $res['pass']; ?></td><td>
+                    <?php if($res['is_admin']==1){echo 'admin';}else{echo 'user';} ?></td></tr>
+                    <?php } ?>
+                </table>
     </div>
     <!-- wrap end... -->
 			</div>
@@ -220,27 +216,26 @@ if(isset($_GET['delete'])){
 			<div class="table-user">
 				 <div class="wrap-table">
        
-        <h3>Товары магазина</h3>
+            <h3>Товары магазина</h3>
        
 
-        <table align="center" border="1" width="95%" >
-        <tr><td>Удаление</td><td>Наименование</td><td>Категория</td><td>Вид</td><td>Название картинки</td></tr>
-       <?php foreach($prod as $table){
-
-        $tab_cat_product = $mysqli->query("SELECT * FROM `cat_product` WHERE `id_cat_product` = '".$table['id_cat_product']."'");
-       $table_cat_product = $tab_cat_product->fetch_assoc();
-       $tab_cat = $mysqli->query("SELECT * FROM `category` WHERE `id_category` = '".$table['id_category']."'");
-       $table_cat = $tab_cat->fetch_assoc();
-         ?>
-               <tr><td>
-               <?php if($isadmin == 1) {?>
-               <a href='?cust&delete=prod&product=<?php echo $table['id_product']; ?>' class='delete' title="удаление   <?php echo $table['title']; ?>"><img src='image/close1.png' width='20'></a></td><td>
-               <?php }?>
-                <?php echo $table['title']; ?></td><td><?php echo  $table_cat['title']; ?></td><td><?=$table_cat_product['title']; ?></td><td><?= $table['img']?></td></tr>
-        
-            <?php } ?>
-        </table>
-    </div>
+            <table align="center" border="1" width="85%" >
+            <tr class="bn"><td class="bn">Удалить</td><td>Наименование</td><td>Категория</td><td>Вид</td><td>Название картинки</td></tr>
+                    <?php foreach($prod as $table){
+                        $tab_cat_product = $mysqli->query("SELECT * FROM `cat_product` WHERE `id_cat_product` = '".$table['id_cat_product']."'");
+                        $table_cat_product = $tab_cat_product->fetch_assoc();
+                        $tab_cat = $mysqli->query("SELECT * FROM `category` WHERE `id_category` = '".$table['id_category']."'");
+                        $table_cat = $tab_cat->fetch_assoc();
+                     ?>
+                   <tr ><td class="bn">
+                    <?php if($isadmin == 1) {?>
+                   <a href='?cust&delete=prod&product=<?php echo $table['id_product']; ?>' class='delete' title="удаление   <?php echo $table['title']; ?>"><img src='image/close1.png' width='20'></a></td><td>
+                    <?php }?>
+                    <?php echo $table['title']; ?></td><td><?php echo  $table_cat['title']; ?></td><td><?=$table_cat_product['title']; ?></td><td><?= $table['img']?></td></tr>
+            
+                <?php } ?>
+            </table>
+        </div>
     <!-- wrap end... -->
 			</div>
 		</div>

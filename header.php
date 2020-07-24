@@ -1,12 +1,31 @@
 <?php 
 
-// if(isset($_COOKIE['auth']) == 'true') {//Получаем куки и проверяем авторизован ли пользователь
+ 
+	
+		
+$result = $mysqli->query("SELECT * FROM `category` "); 
+// if(isset($_COOKIE['auth']) == 'true') 
 //   $auth =  $_COOKIE['auth'];
 //   $userid = $_COOKIE['userid'];
 //   $useremail = $_COOKIE['useremail'];
 //   $username = $_COOKIE['username'];
 //   $usersurname = $_COOKIE['usersurname'];
+if(isset($_GET['basket'])){
+	if(isset($_GET['nameprod'])){
+		$bask = $_GET['basket'];
+		$basketproduct = $_GET['nameprod'];
+		$basket = $mysqli->query("SELECT * FROM `basket` WHERE `id_user` = '".$bask."'");
+		 $bask_ = $basket->fetch_assoc();
+		$bask_prod = $mysqli->query("SELECT * FROM `product`   WHERE `id_product` =  '".$basketproduct."' "); 
+       		 $basket_prod = $bask_prod->fetch_assoc(); 
+		 $mysqli->query("INSERT INTO `basket`  VALUES (NULL, '".$basket_prod['title']."', '".$bask."', '".$basketproduct."')");
+		
+		
+		  header('location:?home');
 
+	}
+
+}
 if(isset($_GET['exit'])){
        
             unset($_COOKIE['auth']);
@@ -36,7 +55,9 @@ if(isset($_GET['exit'])){
 	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"> 
 </head>
 <body>
-	<?php if(isset($_GET['home']) || isset($_GET['guitar'])) {
+	<?php if(isset($_GET['type']) || isset($_GET['cust']) || isset($_GET['name']) ) {
+				
+			}else{
 				include 'media.php';
 			}
 	?>
@@ -61,10 +82,17 @@ if(isset($_GET['exit'])){
 		</form>
 
 		<div class="right-heat-menu">
-		<?php if(isset($_COOKIE['auth']) == 'true') {?>
+		<?php if(isset($_COOKIE['auth']) == 'true') {
+			$userid = $_COOKIE['userid'];
+			 $count_bask = $mysqli->query("SELECT COUNT(*) as `c` FROM  `basket` WHERE `id_user` = '".$userid."'");
+			 $total = mysqli_fetch_assoc($count_bask);
+			
+			?>
 			<div class="basket">
-					<a href="#"><img src="image/buy.png" width="30" title="Корзина"></a>
-				<!-- <div class="alert"><p>1</p></div> -->
+					<a href="?basket=<?=$userid?>"><img src="image/buy.png" width="30" title="Корзина"></a>
+					<?php if($total['c'] != 0){?>
+				<div class="alert"><p><?=$total['c']?> </p></div>
+			<?php }?>
 			</div>
 				
 				<?php $res = urle(); ?>
@@ -77,13 +105,15 @@ if(isset($_GET['exit'])){
 			</div>
 
 				<?php } ?>
-				
-				
-				 
-	
-
 		</div>
 		
 	</div>
 <!-- hat end -->
+<?php
+if(isset($_GET['type']) || isset($_GET['cust'])|| $uri_cle == 'page' || $uri_cle == 'basket' || isset($_GET['product'])|| isset($_GET['category'])){
 
+}else{
+	include('view/site_bar.php');
+
+}
+?>

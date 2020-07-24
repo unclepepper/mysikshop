@@ -1,22 +1,12 @@
 <?php 
- $result = $mysqli->query("SELECT * FROM `category` "); 
-	$rand = $mysqli->query("SELECT * FROM `product` ORDER BY RAND() LIMIT 9 "); 
 
-
+	$rand = $mysqli->query("SELECT * FROM `product` ORDER BY RAND() LIMIT 9 ");
+	$uri = $mysqli->query("SELECT * FROM `cat_product` WHERE `title_en` = '".$produc."' ");  
+ $uri_prod = $uri->fetch_assoc();
+ // $uri_prod = $mysqli->query("SELECT * FROM `product` WHERE `title_en` = '".$product."' "); 
 
 ?>
-<!-- content start -->
-	<div class="wrap">
 
-		<div class="site-bar">
-			<div class="site-bar-links">
-
-				<?php foreach ($result as $value) {?>
-			<a class="links" href="?<?=$value['title_en']?>"><?=$value['title']?></a>
-			<?php }?>
-			
-		</div>
-	</div>
 	<!-- content start -->
 	
 		<div class="contain">
@@ -42,12 +32,15 @@
 					<div class="back">		
 							
 						<div class="back-link">
-							
-							<a href="?<?=$linkcat['title_en'].'/'.$link_product?>" class="button-back">Смотреть больше </a>
-							<a href="?" class="button-back">В корзину </a> 
+							<span class="pay">20 620 ₽</span>
+							<a href="?page/<?=$uri_prod['title_en'].$link_product?>/<?=$uri_prod['title']?>&name=<?=$value['title']?>" class="button-back">Подробнее...</a>
+							<?php if(isset($_COOKIE['auth']) == 'true') {
+								$userid = $_COOKIE['userid'];
+							?>
+							<a href="?home/&basket=<?=$userid?>&nameprod=<?=$value['id_product']?>" class="button-back">В корзину </a> 
+						<?php }?>
 						</div>
 							
-						
 						 
 					</div>
 

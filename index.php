@@ -4,8 +4,25 @@ $mysqli = new mysqli('localhost', 'root', '', 'rock_shop'); //Создаем п�
     if ($mysqli->connect_errno) {
         echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
+$res = urle();
+
+		 $produc = preg_replace('"[A-z]*\/"', '', $res);
+		 $produc = preg_replace('"="', '', $produc);
+		$uri_cle = preg_replace('"/[A-z]*.*"','', $res);
+		 $uri_cle = preg_replace('"[0-9]*"', '', $uri_cle);
+		
+		   // echo  $res;
+
+	$cat_url = $mysqli->query("SELECT * FROM `category` WHERE `title_en` = '".$product."'");
+         $all = $cat_url->fetch_assoc();
+        $cat_id =  $all['id_category'];
+
 
 include 'header.php';
+
+
+
+
 ?>
 <!-- hat end -->
 
@@ -20,13 +37,6 @@ include 'header.php';
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 
-
-
-
-	
-
-		$res = urle();
-		// echo $res;
 
 		if(isset($_GET['delete'])){
 				if($_GET['delete']=='us'){
@@ -44,16 +54,24 @@ include 'header.php';
 							 include 'view/cust.php';
 						}
 					}
-				}	
+				}else if($_GET['delete']=='bask'){
+					if(isset($_GET['prod'])){
+						$product = $_GET['prod'];
+						if($res == 'basketbask'.$product){
+							 include 'view/basket.php';
+						}
+					}
+				}		
        
     	}
 		
 		if($res !== '/'){
 			
-				if(file_exists("view/".$res.".php")){
-				include "view/".$res.".php";
+				if(file_exists("view/".$uri_cle.".php")){
+				include "view/".$uri_cle.".php";
 			}else {
-            include 'view/home.php';
+
+            include 'view/product.php';
 			
 			}     
 			

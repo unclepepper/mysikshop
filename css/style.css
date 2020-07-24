@@ -358,7 +358,7 @@ cursor: pointer;
 .back{
 	display: flex;
 
-	background-color: #1EF077;
+	background-color: #8EB8B8;
 	transform: rotateY(180deg);
 	color: #fff;
 
@@ -376,16 +376,19 @@ cursor: pointer;
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
-	
-
-	
-
+	justify-content: center;
+}
+.pay{
+	margin-bottom: 30px;
+	color:#C53C07;
+	font-size: 20px;
+	font-weight: bold;
 }
 .back a{
 	display: flex;
 	justify-content: center;
 	align-self: center;
-	background-color: #54F398;
+	background-color: #078383;
 	padding: 10px;
 	width: 100%;
 	
@@ -618,3 +621,51 @@ table td img{
 	border-radius: 3px;
 	
 }
+.bn{
+	/*border:none;*/
+	text-align: center;
+}
+.product {
+	box-shadow: 0 0 5px #369B9B;
+	width: 90%;
+	padding: 20px;
+	margin:10px auto;
+	display: flex;
+	justify-content: space-around;
+
+	}
+	.img-product{
+		width: 60%;
+		box-shadow: 0 0 1px #369B9B;
+		border-radius: 5px;
+		padding: 50px 10px;
+	}
+	.sect-product{
+		display: flex;
+		flex-wrap: wrap;
+		margin-right: 0px;
+		
+	}
+	.sect-product h3{
+		
+		width: 100%;
+	}
+	.sect-desc{
+
+		width: 50%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding-top: 40px;
+		font-size: 18px;
+	}
+	.price{
+		width: 50%;
+		display: flex;
+		justify-content: space-around;
+	}
+	.but .button{
+
+		padding: 3px 15px;
+		text-decoration: none;
+	}
